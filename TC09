@@ -1,0 +1,53 @@
+
+//To verify that entering a combination of numbers and special characters in the First Name field,
+//then completing the registration form, redirects the user to the login page.
+
+
+package Project;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class TC09 {
+    public static void main(String[] args) throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://v2learner.aicerts.ai/");
+        
+        // Click Sign Up
+        driver.findElement(By.xpath("//button[text()='Sign Up']")).click();
+        Thread.sleep(2000);
+
+        // Enter invalid First Name
+        driver.findElement(By.id("firstName")).sendKeys("123@456$");
+        Thread.sleep(1000);
+        // Enter valid Last Name
+        driver.findElement(By.id("lastName")).sendKeys("Smith");
+        Thread.sleep(1000);
+        // Enter valid Email
+        driver.findElement(By.id("email")).sendKeys("smith123@email.com");
+        Thread.sleep(1000);
+        // Enter valid Confirm Email
+        driver.findElement(By.id("confirmEmail")).sendKeys("smith123@email.com");
+        Thread.sleep(1000);
+        
+        driver.findElement(By.id("agreeToTerms")).click();
+        // Click sign up/submit button (update locator if needed)
+        driver.findElement(By.xpath("//button[text()='Sign up for Free Course']")).click();
+        Thread.sleep(2000);
+
+        // Check if redirected to login page (e.g. check page title, URL, or login form present)
+        String url = driver.getCurrentUrl();
+        boolean isOtpVerification = url.toLowerCase().contains("login") ||
+            driver.findElements(By.xpath("//*[contains(text(),'Login')]")).size() > 0;
+        
+        if (isOtpVerification) {
+            System.out.println("Bug Found: Redirected to Otp Verification after invalid input - Test FAILED");
+        } else {
+            System.out.println("Test PASSED: Registration blocked for invalid First Name");
+        }
+        
+        driver.quit();
+    }
+}
