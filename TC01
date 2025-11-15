@@ -1,0 +1,36 @@
+
+//To verify that when user enters the app url in the browser ,welcome page is displayed 
+
+package Project;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class TC01 {
+public static void main(String[] args) throws InterruptedException {
+	//Open browser
+	WebDriver driver=new ChromeDriver();
+	//Maximize the browser window
+	driver.manage().window().maximize();
+	// Go to website
+	driver.get("https://v2learner.aicerts.ai/ ");
+	// Wait 2 seconds
+	Thread.sleep(2000); 
+    
+    //Reads the current page title and prints it in the console.
+    String title = driver.getTitle();
+    System.out.println("Page Title: " + title);
+    
+    //Checks if the page title includes "AI".
+    //If true, it prints “TEST PASSED.”
+    //Otherwise, it prints “TEST FAILED.”
+    if (title.contains("AI")) {
+        System.out.println("TEST PASSED");
+    } else {
+        System.out.println("TEST FAILED");
+    }
+    
+    // Close browser
+    driver.quit();
+}
+}
