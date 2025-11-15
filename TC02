@@ -1,0 +1,52 @@
+
+//To verify that the portal laods correctly on all the browsers such as chrome, edge , safari, brave
+ //Test Steps : 1.Open web browser individually
+              //2.Enter URL on all browsers
+              //3.Welcome page should be displayed (title confirms loaded page)
+package Project;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.safari.SafariDriver;
+
+public class TC02 {
+		public static void main(String[] args) throws InterruptedException {
+		
+// Create an object of TC02 to call the non-static basic() method
+		TC02 tc= new TC02();
+	
+	// Create Chrome browser instance
+	 ChromeDriver driver = new ChromeDriver();
+	 driver.manage().window().maximize();
+	// Call basic() method to open URL and get title in Chrome
+	 tc.basic(driver);
+	 //delay of 1 seconds
+	 Thread.sleep(1000);
+	 
+	 EdgeDriver driver1= new EdgeDriver();
+	 tc.basic(driver1);
+	 Thread.sleep(1000);
+	 
+	 WebDriver driver2= new FirefoxDriver();
+	 tc.basic(driver2);
+	 Thread.sleep(1000);
+	 
+	  WebDriver driver3= new SafariDriver();
+	 tc.basic(driver3);
+	 Thread.sleep(1000);
+	 }
+
+// Method that opens the given URL, prints the page title, and closes the browser
+	public void basic(WebDriver driver) {
+		driver.get("https://v2learner.aicerts.ai/");// Navigate to the URL in current browser
+		String title= driver.getTitle();// Fetch and store the page's title
+		System.out.println(title);// Print the page title to the console
+		driver.quit(); // Close the browser window and free resources
+		
+		
+	}
+		
+	}
+
