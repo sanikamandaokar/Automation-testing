@@ -1,0 +1,49 @@
+
+	package Project;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class TC35a {
+    public static void main(String[] args) throws InterruptedException {
+        
+        WebDriver driver = new ChromeDriver();
+        
+        try {
+            // Navigate to portal and complete registration to reach OTP page
+            driver.get("https://v2learner.aicerts.ai/");
+            
+            // (Assume you're already on OTP verification page after registration)
+            // If not, add steps to register first
+            
+            Thread.sleep(3000); // Wait for OTP page to load
+            
+            // Enter OTP in text field (update locator as needed)
+            driver.findElement(By.name("otp")).sendKeys("1234");
+            
+            // Click Submit button
+            driver.findElement(By.xpath("//button[contains(text(),'Submit')]")).click();
+            
+            Thread.sleep(3000); // Wait for navigation
+            
+            // Verify navigation to learner dashboard
+            String currentUrl = driver.getCurrentUrl();
+            String pageTitle = driver.getTitle();
+            
+            // Check if redirected to learner portal/dashboard
+            if (currentUrl.contains("learner") || currentUrl.contains("dashboard") || 
+                pageTitle.toLowerCase().contains("dashboard") || pageTitle.toLowerCase().contains("learner")) {
+                System.out.println("Test PASSED: OTP accepted and navigated to learner portal");
+            } else {
+                System.out.println("Test FAILED: Not navigated to learner portal");
+                System.out.println("Current URL: " + currentUrl);
+            }
+            
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        } finally {
+            driver.quit();
+        }
+    }
+}
