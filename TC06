@@ -1,0 +1,45 @@
+package Project;
+
+import java.util.List;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class TC06 {
+public static void main(String[] args) throws InterruptedException {
+        
+        // Open browser
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        
+        // Navigate to portal
+        driver.get("https://v2learner.aicerts.ai/");
+        
+        // Click Sign Up button (update locator as needed)
+        driver.findElement(By.xpath("//button[text()='Sign Up']")).click();
+        
+        // Wait for page to load
+        Thread.sleep(2000);
+        
+        // Find all labels with asterisk (*)
+        List<WebElement> labels = driver.findElements(By.tagName("label"));
+        
+        int count = 0;
+        for (WebElement label : labels) {
+            if (label.getText().contains("*")) {
+                System.out.println("Mandatory field found: " + label.getText());
+                count++;
+            }
+         // Print result
+            if (count > 0) {
+                System.out.println("Test PASSED: " + count + " mandatory fields with asterisk found");
+            } else {
+                System.out.println("Test FAILED: No mandatory fields with asterisk");
+            }
+            
+            driver.quit();
+        }
+}
+}
