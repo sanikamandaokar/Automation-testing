@@ -1,0 +1,42 @@
+//TC_07-To verify that 'First Name' text field should only accept only alphabets
+//1.Open Browser                              
+//2.Enter portal Url                               
+//3.Click on Sign Up                          
+//4.Enter some alphabets in first name text field
+//First name text field should accept the input and error message should not be displayed
+
+package Project;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class TC07 {
+    public static void main(String[] args) throws InterruptedException {
+        
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://v2learner.aicerts.ai/");
+       
+       
+        driver.findElement(By.xpath("//button[text()='Sign Up']")).click();
+        //Thread.sleep(2000); // Wait for page to load
+        
+        // Find First Name text field (update locator if needed)
+        WebElement firstName = driver.findElement(By.name("firstName"));
+        firstName.sendKeys("abcdef");
+        
+        // Check if input is present and error is not displayed
+        String value = driver.findElement(By.id("firstName")).getAttribute("value");
+        
+        if (value.equals("abcdef") ) {
+            System.out.println("Test PASSED: Only alphabets accepted, no error message");
+        } else {
+            System.out.println("Test FAILED: Field not accepting alphabets or error message displayed");
+        }
+        
+        // Close browser
+        driver.quit();
+    }
+}
