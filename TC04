@@ -1,0 +1,36 @@
+
+//To verify that when user click on 'Sign Up' button the user is redirected to registration page
+
+package Project;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class TC04 {
+	    public static void main(String[] args) throws InterruptedException {
+			WebDriver driver= new ChromeDriver();
+			driver.manage().window().maximize();
+			driver.get("https://v2learner.aicerts.ai/");
+			
+			driver.findElement(By.xpath("//button[text()='Sign Up']")).click();
+			Thread.sleep(2000);
+			
+			//WebElement firstName = driver.findElement(By.id("firstName"));
+			//firstName.sendKeys("Ram");
+			//Thread.sleep(2000);
+			
+			//WebElement lastName = driver.findElement(By.id("lastName"));
+			//lastName.sendKeys("Rathore");
+			//Thread.sleep(2000);
+			
+			//WebElement Email = driver.findElement(By.id("email"));
+			//Email.sendKeys("");
+			//Thread.sleep(2000);
+			
+			
+		}
+	}
+
+
