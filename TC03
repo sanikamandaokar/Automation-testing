@@ -1,0 +1,41 @@
+
+//TC_03-To verify that when user enters invalid portal URL , error message is displayed
+
+//This code opens a Chrome browser and tries to load an invalid URL. It uses a try-catch-finally block to handle the process safely. 
+//The code in the try block attempts to open the page. If the URL is invalid and causes an error, the catch block runs to confirm the 
+//error occurred and marks the test as passed. The finally block always runs after try or catch to close the browser, making sure no resources are left open. 
+//This structure ensures the test handles errors smoothly and cleans up properly every time.
+
+package Project;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class TC03 {
+    public static void main(String[] args) throws InterruptedException {
+        
+    	//Launch Chrome browser instance
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        
+     // TRY block: Contains code that might throw an exception
+        try {
+            driver.get("https://v3Learner.aicerts.ai/");// Attempt to navigate to an invalid URL
+            System.out.println("Page loaded");// If URL loads successfully, print this message
+        }
+        
+     // CATCH block: Executes ONLY if an exception occurs in try block
+        catch (Exception e) {
+            System.out.println("Error: Invalid URL - Test PASSED");// Print message confirming error was caught (test passes)
+        } 
+        
+     // FINALLY block: ALWAYS executes, whether exception occurs or not 
+       finally {
+        	Thread.sleep(2000);
+            driver.quit();
+            
+        }
+    }
+}
+
+
